@@ -38,10 +38,26 @@ table "users" {
   }
 }
 
+table "outlier" {
+  schema = schema.out
+  column "id" {
+    null = false
+    type = sql("serial")
+  }
+  column "text" {
+    null = true
+    type = sql("text")
+  }
+}
+
 schema "public" {
   comment = "Public schema for customer-facing data"
 }
 
 schema "private" {
   comment = "Private schema for internal data"
+}
+
+schema "out" {
+  comment = "out schema is not allowed"
 }
