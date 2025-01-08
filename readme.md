@@ -36,3 +36,10 @@ curl -X POST http://localhost:8080/api/v1/graphql \
 ```
 {"errors":[{"message":"schema 'out' not allowed"}]}
 ```
+
+
+## db - hcl - atlas migrate
+
+```
+atlas schema apply -u "postgres://postgres:postgres@localhost:5432/postgres" --to file://schema.hcl --dev-url "docker://postgres/15"
+```
