@@ -1,7 +1,7 @@
 query example :
 
 ```
-curl -X POST http://localhost:8080/api/v1/graphql   -H "Content-Type: application/json"   -d '{"query": "query { productsofpublic { id name } usersofprivate { id email } }"}'
+query { productsofpublic { id name } usersofprivate { id email } }
 ```
 ```
 {"data":{"usersofprivate":[{"id":4,"email":"user@example.com"},{"id":5,"email":"user@example.com"}],"productsofpublic":[{"id":1,"name":"Sample Product"},{"id":2,"name":"Sample Product"}]}}
@@ -10,7 +10,7 @@ curl -X POST http://localhost:8080/api/v1/graphql   -H "Content-Type: applicatio
 default :
 
 ```
-curl -X POST http://localhost:8080/api/v1/graphql   -H "Content-Type: application/json"   -d '{"query": "mutation { products(insert: { name: \"Sample Product\", price: 19.99 }) { id name price } }"}'
+mutation { products(insert: { name: \"Sample Product\", price: 19.99 }) { id name price } }
 ```
 ```
 {"data":{"products":[{"id":3,"name":"Sample Product","price":19.99}]}}
@@ -19,7 +19,7 @@ curl -X POST http://localhost:8080/api/v1/graphql   -H "Content-Type: applicatio
 with schema mentioned :
 
 ```
-curl -X POST http://localhost:8080/api/v1/graphql   -H "Content-Type: application/json"   -d '{"query": "mutation { usersofprivate(insert: { email: \"user@example.com\", assword: \"haha\" }) { id email } }"}'
+mutation { usersofprivate(insert: { email: \"user@example.com\", assword: \"haha\" }) { id email } }
 ```
 ```
 {"data":{"usersofprivate":[{"id":6,"email":"user@example.com"}]}}
@@ -28,9 +28,7 @@ curl -X POST http://localhost:8080/api/v1/graphql   -H "Content-Type: applicatio
 if schema is not in the allowed list :
 
 ```
-curl -X POST http://localhost:8080/api/v1/graphql \
-  -H "Content-Type: application/json" \
-  -d '{"query": "mutation { outlierofout(insert: { id: 1, text: \"this is an outlier example\" }) { id text } }"}'
+mutation { outlierofout(insert: { id: 1, text: \"this is an outlier example\" }) { id text } }
 ```
 
 ```
@@ -38,7 +36,7 @@ curl -X POST http://localhost:8080/api/v1/graphql \
 ```
 
 
-## db - hcl - atlas migrate
+## db - hcl - atlas `migrate`
 
 ```
 atlas schema apply -u "postgres://postgres:postgres@localhost:5432/postgres" --to file://schema.hcl --dev-url "docker://postgres/15"
